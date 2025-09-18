@@ -108,7 +108,7 @@ Remove um animal pelo ID.
 
 ## Material de Apoio 📚
 
-A baixo estão alguns links úteis para ajudá-lo a iniciar o projeto:
+A seguir estão alguns links úteis para ajudá-lo a iniciar o projeto:
 - Docker: [Documentação Oficial do Docker](https://docs.docker.com/get-started/)
 - Aplicação NodeJs com Docker: [Tutorial de Docker para Node.js](https://youtu.be/MiAiFTQjitc)
 
@@ -118,5 +118,7 @@ Sinta-se a vontade para a escolher o framework que mais domina ou tem interesse 
 - Fastify: [Documentação Oficial do Fastify](https://www.fastify.io/docs/latest/)
 
 ### Saiba o que está fazendo em cada etapa do desenvolvimento, pois será questionado sobre suas escolhas técnicas.
+
+### Serão considerados os commits feitos até o dia 22/09 23:59h.
 
 Em caso de dúvidas, entre em contato! 💬
