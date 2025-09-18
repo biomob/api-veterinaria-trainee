@@ -103,19 +103,20 @@ Remove um animal pelo ID.
 
 - Os dados são armazenados apenas em memória e serão perdidos ao reiniciar a aplicação.
 - O projeto é exclusivamente para fins de avaliação técnica.
-- Saiba o que está fazendo em cada etapa do desenvolvimento, pois será questionado sobre suas escolhas técnicas.
 
 ---
 
 ## Material de Apoio 📚
 
-Docker: [Documentação Oficial do Docker](https://docs.docker.com/get-started/)
-Aplicação NodeJs com Docker: [Tutorial de Docker para Node.js](https://youtu.be/MiAiFTQjitc)
+A baixo estão alguns links úteis para ajudá-lo a iniciar o projeto:
+- Docker: [Documentação Oficial do Docker](https://docs.docker.com/get-started/)
+- Aplicação NodeJs com Docker: [Tutorial de Docker para Node.js](https://youtu.be/MiAiFTQjitc)
 
-- Sinta-se a vontade para a escolher o framework que mais domina ou tem interesse em aprender:
-Express.js: [Documentação Oficial do Express](https://expressjs.com/)
-NestJS: [Documentação Oficial do NestJS](https://docs.nestjs.com/)
-Fastify: [Documentação Oficial do Fastify](https://www.fastify.io/docs/latest/)
+Sinta-se a vontade para a escolher o framework que mais domina ou tem interesse em aprender:
+- Express.js: [Documentação Oficial do Express](https://expressjs.com/)
+- NestJS: [Documentação Oficial do NestJS](https://docs.nestjs.com/)
+- Fastify: [Documentação Oficial do Fastify](https://www.fastify.io/docs/latest/)
 
+### Saiba o que está fazendo em cada etapa do desenvolvimento, pois será questionado sobre suas escolhas técnicas.
 
 Em caso de dúvidas, entre em contato! 💬
