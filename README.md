@@ -107,4 +107,15 @@ Remove um animal pelo ID.
 
 ---
 
+## Material de Apoio 📚
+
+Docker: [Documentação Oficial do Docker](https://docs.docker.com/get-started/)
+Aplicação NodeJs com Docker: [Tutorial de Docker para Node.js](https://youtu.be/MiAiFTQjitc)
+
+- Sinta-se a vontade para a escolher o framework que mais domina ou tem interesse em aprender:
+Express.js: [Documentação Oficial do Express](https://expressjs.com/)
+NestJS: [Documentação Oficial do NestJS](https://docs.nestjs.com/)
+Fastify: [Documentação Oficial do Fastify](https://www.fastify.io/docs/latest/)
+
+
 Em caso de dúvidas, entre em contato! 💬
