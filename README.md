@@ -1,10 +1,3 @@
-
-# 🐾 API Veterinária Trainee
-
-## Requisitos do Projeto 📋
-
-
-
 # 🐾 Instruções para o Teste Técnico - API Veterinária Trainee
 
 Bem-vindo ao teste técnico! Este documento contém todas as informações necessárias para você realizar o desafio proposto. Leia atentamente cada seção antes de iniciar o desenvolvimento.
