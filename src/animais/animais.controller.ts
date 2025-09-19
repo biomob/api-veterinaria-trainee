@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Query, ParseIntPipe, Put } from '@nestjs/common';
 import type { Animal } from './entities/animal.entity';
 import { AnimaisService } from './animais.service';
 import { CreateAnimalDto } from './dto/create-animal.dto';
-// import { UpdateAnimaiDto } from './dto/update-animai.dto';
+import { UpdateAnimalDto } from './dto/update-animal.dto';
 
 @Controller('animais')
 export class AnimaisController {
@@ -23,10 +23,13 @@ export class AnimaisController {
     return this.animaisService.findOne(id);
   }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateAnimaiDto: UpdateAnimaiDto) {
-  //   return this.animaisService.update(+id, updateAnimaiDto);
-  // }
+  @Put(':id')
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateDto: UpdateAnimalDto,
+  ): Animal {
+    return this.animaisService.update(id, updateDto);
+  }
 
   @Delete(':id')
   remove(@Param('id') id: string) {

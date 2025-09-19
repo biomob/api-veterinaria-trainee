@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Animal } from './entities/animal.entity';
 import { CreateAnimalDto } from './dto/create-animal.dto';
-// import { UpdateAnimaiDto } from './dto/update-animai.dto';
+import { UpdateAnimalDto } from './dto/update-animal.dto';
 
 
 
@@ -34,9 +34,18 @@ export class AnimaisService {
     return animal;
   }
 
-  // update(id: number, updateAnimaiDto: UpdateAnimalDto) {
-  //   return `This action updates a #${id} animai`;
-  // }
+  update(id: number, updateDto: UpdateAnimalDto): Animal {
+    const animal = this.findOne(id);
+
+    if (updateDto.nome !== undefined) {
+      animal.nome = updateDto.nome;
+    }
+    
+    if (updateDto.idade !== undefined) {
+      animal.idade = updateDto.idade;
+    }
+    return animal;
+  }
 
   remove(id: number) {
     return `This action removes a #${id} animai`;
