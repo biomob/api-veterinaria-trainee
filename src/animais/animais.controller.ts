@@ -1,5 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
-import { Animal } from './entities/animal.entity';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe } from '@nestjs/common';
+import type { Animal } from './entities/animal.entity';
 import { AnimaisService } from './animais.service';
 import { CreateAnimalDto } from './dto/create-animal.dto';
 // import { UpdateAnimaiDto } from './dto/update-animai.dto';
@@ -19,8 +19,8 @@ export class AnimaisController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.animaisService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number): Animal {
+    return this.animaisService.findOne(id);
   }
 
   // @Patch(':id')

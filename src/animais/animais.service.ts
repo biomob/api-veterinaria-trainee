@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Animal } from './entities/animal.entity';
 import { CreateAnimalDto } from './dto/create-animal.dto';
 // import { UpdateAnimaiDto } from './dto/update-animai.dto';
@@ -26,8 +26,12 @@ export class AnimaisService {
     return this.animais;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} animai`;
+  findOne(id: number): Animal {
+    const animal = this.animais.find(a => a.id === id);
+    if (!animal) {
+      throw new NotFoundException('Animal não encontrado.')
+    }
+    return animal;
   }
 
   // update(id: number, updateAnimaiDto: UpdateAnimalDto) {
