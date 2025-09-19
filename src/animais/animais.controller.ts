@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Query, ParseIntPipe, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Query, ParseIntPipe, Put, HttpCode } from '@nestjs/common';
 import type { Animal } from './entities/animal.entity';
 import { AnimaisService } from './animais.service';
 import { CreateAnimalDto } from './dto/create-animal.dto';
@@ -32,7 +32,8 @@ export class AnimaisController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.animaisService.remove(+id);
+  @HttpCode(204)
+  remove(@Param('id', ParseIntPipe) id: number):void {
+    this.animaisService.remove(id);
   }
 }

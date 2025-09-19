@@ -47,7 +47,13 @@ export class AnimaisService {
     return animal;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} animai`;
+  remove(id: number): void {
+    const index = this.animais.findIndex(a => a.id === id);
+
+    if (index === -1) {
+      throw new NotFoundException('Animal não encontrado');
+    }
+
+    this.animais.splice(index, 1);
   }
 }
