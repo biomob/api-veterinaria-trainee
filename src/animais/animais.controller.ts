@@ -9,8 +9,13 @@ export class AnimaisController {
   constructor(private readonly animaisService: AnimaisService) {}
 
   @Post()
-  create(@Body() createAnimaiDto: CreateAnimalDto) {
-    return this.animaisService.create(createAnimaiDto);
+  create(@Body() createAnimalDto: CreateAnimalDto) {
+    return this.animaisService.create(createAnimalDto);
+  }
+
+  @Post('lista')
+  createLista(@Body() createDtos: CreateAnimalDto[]): Animal[] {
+    return this.animaisService.createList(createDtos);
   }
 
   @Get()

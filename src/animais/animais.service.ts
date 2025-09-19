@@ -19,6 +19,19 @@ export class AnimaisService {
     return novoAnimal;
   }
 
+  createList(createDtos: CreateAnimalDto[]): Animal[] {
+    const novosAnimais: Animal[] = createDtos.map(dto => {
+      const novo: Animal = {
+        id: this.nextId++,
+        ...dto,
+      };
+      this.animais.push(novo);
+      return novo;
+    });
+    
+    return novosAnimais;
+  }
+
   findAll(especie?: string): Animal[] {  //Verifica se o filtro foi passado, se não, retorna todos os animais.
     if (especie) {
       return this.animais.filter(animal => animal.especie === especie);
