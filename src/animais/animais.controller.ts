@@ -1,14 +1,15 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Animal } from './entities/animal.entity';
 import { AnimaisService } from './animais.service';
-import { CreateAnimaiDto } from './dto/create-animai.dto';
-import { UpdateAnimaiDto } from './dto/update-animai.dto';
+import { CreateAnimalDto } from './dto/create-animal.dto';
+// import { UpdateAnimaiDto } from './dto/update-animai.dto';
 
 @Controller('animais')
 export class AnimaisController {
   constructor(private readonly animaisService: AnimaisService) {}
 
   @Post()
-  create(@Body() createAnimaiDto: CreateAnimaiDto) {
+  create(@Body() createAnimaiDto: CreateAnimalDto) {
     return this.animaisService.create(createAnimaiDto);
   }
 
@@ -22,10 +23,10 @@ export class AnimaisController {
     return this.animaisService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAnimaiDto: UpdateAnimaiDto) {
-    return this.animaisService.update(+id, updateAnimaiDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateAnimaiDto: UpdateAnimaiDto) {
+  //   return this.animaisService.update(+id, updateAnimaiDto);
+  // }
 
   @Delete(':id')
   remove(@Param('id') id: string) {

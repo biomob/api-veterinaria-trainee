@@ -1,11 +1,22 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAnimaiDto } from './dto/create-animai.dto';
-import { UpdateAnimaiDto } from './dto/update-animai.dto';
+import { Animal } from './entities/animal.entity';
+import { CreateAnimalDto } from './dto/create-animal.dto';
+// import { UpdateAnimaiDto } from './dto/update-animai.dto';
+
+
 
 @Injectable()
 export class AnimaisService {
-  create(createAnimaiDto: CreateAnimaiDto) {
-    return 'This action adds a new animai';
+  private animais: Animal[] = [];
+  private nextId = 1;
+
+  create(createDto: CreateAnimalDto): Animal {
+    const novoAnimal: Animal = {
+      id: this.nextId++,
+      ...createDto,
+    };
+    this.animais.push(novoAnimal);
+    return novoAnimal;
   }
 
   findAll() {
@@ -16,9 +27,9 @@ export class AnimaisService {
     return `This action returns a #${id} animai`;
   }
 
-  update(id: number, updateAnimaiDto: UpdateAnimaiDto) {
-    return `This action updates a #${id} animai`;
-  }
+  // update(id: number, updateAnimaiDto: UpdateAnimalDto) {
+  //   return `This action updates a #${id} animai`;
+  // }
 
   remove(id: number) {
     return `This action removes a #${id} animai`;
