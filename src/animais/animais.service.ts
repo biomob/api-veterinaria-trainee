@@ -7,8 +7,8 @@ import { UpdateAnimalDto } from './dto/update-animal.dto';
 
 @Injectable()
 export class AnimaisService {
-  private animais: Animal[] = [];
-  private nextId = 1;
+  private animais: Animal[] = []; //base de dados em memória
+  private nextId = 1; //controla o ID a ser atribuído a um animal novo
 
   create(createDto: CreateAnimalDto): Animal {
     const novoAnimal: Animal = {
@@ -28,7 +28,7 @@ export class AnimaisService {
       this.animais.push(novo);
       return novo;
     });
-    
+
     return novosAnimais;
   }
 
