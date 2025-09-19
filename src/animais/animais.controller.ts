@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { Animal } from './entities/animal.entity';
 import { AnimaisService } from './animais.service';
 import { CreateAnimalDto } from './dto/create-animal.dto';
@@ -14,8 +14,8 @@ export class AnimaisController {
   }
 
   @Get()
-  findAll() {
-    return this.animaisService.findAll();
+  findAll(@Query('especie') especie?: string): Animal[] {  //@Query('especie') serve para acapturar o parâmetro da URL.
+    return this.animaisService.findAll(especie);
   }
 
   @Get(':id')

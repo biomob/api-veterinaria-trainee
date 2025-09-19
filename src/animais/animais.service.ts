@@ -19,8 +19,11 @@ export class AnimaisService {
     return novoAnimal;
   }
 
-  findAll() {
-    return `This action returns all animais`;
+  findAll(especie?: string): Animal[] {  //Verifica se o filtro foi passado, se não, retorna todos os animais.
+    if (especie) {
+      return this.animais.filter(animal => animal.especie === especie);
+    }
+    return this.animais;
   }
 
   findOne(id: number) {
