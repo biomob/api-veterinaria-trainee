@@ -1,124 +1,98 @@
-# 🐾 Instruções para o Teste Técnico - API Veterinária Trainee
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+</p>
 
-Bem-vindo ao teste técnico! Este documento contém todas as informações necessárias para você realizar o desafio proposto. Leia atentamente cada seção antes de iniciar o desenvolvimento.
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-## Contexto
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-Dra. Ana, uma médica veterinária dedicada, está expandindo sua clínica e precisa de uma solução eficiente para gerenciar o cadastro dos animais atendidos. Sua missão é criar uma API RESTful que permita registrar, consultar, atualizar e remover pacientes de forma simples e rápida. 🐕🐈
+## Description
 
-## Objetivo do Desafio 🚀
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-Desenvolver uma API RESTful utilizando Node.js e o framework de sua preferência (Express.js, Fastify ou NestJS), com dados armazenados em memória e dockerização completa.
+## Project setup
 
-## Requisitos Técnicos 📋
-
-- Node.js
-- Framework: Express.js, Fastify ou NestJS
-- Dados em memória (não usar banco de dados)
-- Dockerfile funcional
-- Porta padrão: 3000
-
-## Endpoints da API
-
-### ➕ POST /animais
-Adiciona um novo animal à lista de pacientes.
-**Exemplo de corpo da requisição:**
-```json
-{
-	"nome": "Rex",
-	"especie": "cachorro",
-	"idade": 5
-}
-```
-**Resposta esperada:**
-```json
-{
-	"id": 1,
-	"nome": "Rex",
-	"especie": "cachorro",
-	"idade": 5
-}
+```bash
+$ npm install
 ```
 
-### 📋 GET /animais
-Retorna todos os animais cadastrados.
-**Filtro por espécie:** `/animais?especie=cachorro`
-**Resposta esperada:**
-```json
-[
-	{ "id": 1, "nome": "Rex", "especie": "cachorro", "idade": 5 },
-	{ "id": 2, "nome": "Miau", "especie": "gato", "idade": 3 }
-]
+## Compile and run the project
+
+```bash
+# development
+$ npm run start
+
+# watch mode
+$ npm run start:dev
+
+# production mode
+$ npm run start:prod
 ```
 
-### 🔍 GET /animais/:id
-Retorna os detalhes de um animal pelo ID.
-- Se encontrado: objeto JSON do animal
-- Se não encontrado: status 404 Not Found com mensagem de erro
+## Run tests
 
-### ✏️ PUT /animais/:id
-Atualiza as informações de um animal pelo ID.
-**Exemplo de corpo da requisição:**
-```json
-{
-	"nome": "Max",
-	"idade": 6
-}
+```bash
+# unit tests
+$ npm run test
+
+# e2e tests
+$ npm run test:e2e
+
+# test coverage
+$ npm run test:cov
 ```
-- Se atualizado: retorna o animal atualizado
-- Se não encontrado: status 404 Not Found
 
-### 🗑️ DELETE /animais/:id
-Remove um animal pelo ID.
-- Sucesso: status 204 No Content
-- Não encontrado: status 404 Not Found
+## Deployment
 
-## Critérios de Avaliação 🧐
+When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
 
-- Implementação dos requisitos
-- Dockerfile funcional
-- Organização e estrutura do projeto
-- Legibilidade e boas práticas
-- Tratamento correto de erros e status HTTP
-- Documentação clara
+If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
 
-## Como Submeter o Projeto 🏁
+```bash
+$ npm install -g @nestjs/mau
+$ mau deploy
+```
 
-1. 📥 **Clone este repositório:**
-	 ```
-	 git clone <URL_DO_REPOSITORIO>
-	 cd api-veterinaria-trainee
-	 ```
-2. 🐳 **Construa a imagem Docker:**
-	 ```
-	 docker build -t api-veterinaria-trainee .
-	 ```
-3. ▶️ **Execute o contêiner:**
-	 ```
-	 docker run -p 3000:3000 api-veterinaria-trainee
-	 ```
-4. 📤 **Suba o projeto para o GitHub e compartilhe o link.**
+With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
 
-## Observações Importantes ⚠️
+## Resources
 
-- Os dados são armazenados apenas em memória e serão perdidos ao reiniciar a aplicação.
-- O projeto é exclusivamente para fins de avaliação técnica.
+Check out a few resources that may come in handy when working with NestJS:
 
----
+- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
+- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
+- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
+- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
+- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
+- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
+- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
+- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
 
-## Material de Apoio 📚
+## Support
 
-A seguir estão alguns links úteis para ajudá-lo a iniciar o projeto:
-- Docker: [Documentação Oficial do Docker](https://docs.docker.com/get-started/)
-- Aplicação NodeJs com Docker: [Tutorial de Docker para Node.js](https://youtu.be/MiAiFTQjitc)
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-Sinta-se a vontade para a escolher o framework que mais domina ou tem interesse em aprender:
-- Express.js: [Documentação Oficial do Express](https://expressjs.com/)
-- NestJS: [Documentação Oficial do NestJS](https://docs.nestjs.com/)
-- Fastify: [Documentação Oficial do Fastify](https://www.fastify.io/docs/latest/)
+## Stay in touch
 
-### Saiba o que está fazendo em cada etapa do desenvolvimento, pois será questionado sobre suas escolhas técnicas.
+- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
 
-### Serão considerados os commits feitos até o dia 22/09 23:59h.
+## License
 
-Em caso de dúvidas, entre em contato! 💬
+Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
