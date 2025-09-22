@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Put, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, ParseIntPipe, UsePipes, ValidationPipe  } from '@nestjs/common';
 import { AnimaisService } from './animais.service';
 import { CreateAnimaisDto } from './dto/create-animais.dto';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
@@ -11,6 +11,15 @@ export class AnimaisController {
   @ApiOperation({ summary: 'Cria um novo animal' })
   @ApiResponse({ status: 201, description: 'Animal criado com sucesso.' })
   @Post()
+  @UsePipes(
+  new ValidationPipe({
+    whitelist: true,
+    forbidNonWhitelisted: true,
+    transform: true,
+    disableErrorMessages: true,
+  }),
+  )
+  
   create(@Body() createAnimaisDto: CreateAnimaisDto) {
     return this.animaisService.create(createAnimaisDto);
   }

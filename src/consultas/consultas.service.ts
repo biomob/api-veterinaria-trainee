@@ -27,21 +27,31 @@ export class ConsultasService {
       c => this.dateOnlyString(c.dataConsulta) === newDateStr && c.horarioConsulta === horario,
     );
     if (conflito) {
-      throw new BadRequestException(`Já existe uma consulta no dia ${newDateStr} às ${horario}`);
+      throw new BadRequestException({
+        statusCode: 400,
+        message: `Já existe uma consulta no dia ${newDateStr} às ${horario}`,
+        errorCode: 'CONSULTA_CONFLITO',
+      });
     }
 
     let animal: Animais | null = null;
     if (createConsultaDto.animalId) {
       animal = this.animaisService.findOne(createConsultaDto.animalId);
       if (!animal) {
-        throw new NotFoundException(`Animal com id ${createConsultaDto.animalId} não encontrado`);
+        throw new NotFoundException({
+          statusCode: 404,
+          message: `Animal com id ${createConsultaDto.animalId} não encontrado`,
+          errorCode: 'ANIMAL_NAO_ENCONTRADO',
+        });
       }
     } else {
       const { nomeAnimal, especie, idade, genero, responsavel, telefoneResponsavel } = createConsultaDto;
       if (!nomeAnimal || !especie || idade === undefined || !genero || !responsavel || !telefoneResponsavel) {
-        throw new BadRequestException(
-          'Para criar um animal, preencha: nomeAnimal, especie, idade, genero, responsavel, telefoneResponsavel',
-        );
+        throw new BadRequestException({
+          statusCode: 400,
+          message:'Para criar um animal, preencha todos os campos: nomeAnimal, especie, idade, genero, responsavel, telefoneResponsavel',
+          errorCode: 'ANIMAL_NAO_CADASTRADO',
+        });
       }
       animal = this.animaisService.create({
         nome: nomeAnimal,
@@ -83,14 +93,24 @@ export class ConsultasService {
 
   findOne(id: number): Partial<Consulta> {
     const consulta = this.consultas.find(c => c.id === id);
-    if (!consulta) throw new NotFoundException(`Consulta com id ${id} não encontrada`);
+    if (!consulta) {
+      throw new NotFoundException({
+        statusCode: 404,
+        message: `Consulta com id ${id} não encontrada`,
+        errorCode: 'CONSULTA_NAO_ENCONTRADA',
+      });
+    }
     const { historicoConsultas, ...animalSemHistorico } = consulta.animal;
     return { ...consulta, animal: animalSemHistorico };
   }
 
   update(id: number, updateConsultaDto: CreateConsultaDto): Partial<Consulta> {
     const consultaIndex = this.consultas.findIndex(c => c.id === id);
-    if (consultaIndex === -1) throw new NotFoundException(`Consulta com id ${id} não encontrada`);
+    if (consultaIndex === -1) throw new NotFoundException({
+        statusCode: 404,
+        message: `Consulta com id ${id} não encontrada`,
+        errorCode: 'CONSULTA_NAO_ENCONTRADA',
+    });
     const consulta = this.consultas[consultaIndex];
 
     const newDate = updateConsultaDto.dataConsulta ? new Date(updateConsultaDto.dataConsulta) : consulta.dataConsulta;
@@ -101,7 +121,11 @@ export class ConsultasService {
       c => c.id !== id && this.dateOnlyString(c.dataConsulta) === newDateStr && c.horarioConsulta === newHorario,
     );
     if (conflito) {
-      throw new BadRequestException(`Já existe uma consulta no dia ${newDateStr} às ${newHorario}`);
+      throw new BadRequestException({
+        statusCode: 400,
+        message: `Já existe uma consulta no dia ${newDateStr} às ${newHorario}`,
+        errorCode: 'CONSULTA_CONFLITO',
+      });
     }
 
     const updatedConsulta: Consulta = {
@@ -127,7 +151,11 @@ export class ConsultasService {
 
   remove(id: number): void {
     const index = this.consultas.findIndex(c => c.id === id);
-    if (index === -1) throw new NotFoundException(`Consulta com id ${id} não encontrada`);
+    if (index === -1) throw new NotFoundException({
+        statusCode: 404,
+        message: `Consulta com id ${id} não encontrada`,
+        errorCode: 'CONSULTA_NAO_ENCONTRADA',
+    });
 
     const consulta = this.consultas[index];
     if (consulta.animal?.historicoConsultas) {
