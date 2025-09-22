@@ -1,124 +1,82 @@
-# 🐾 Instruções para o Teste Técnico - API Veterinária Trainee
+## 🐾 API Veterinária Trainee
 
-Bem-vindo ao teste técnico! Este documento contém todas as informações necessárias para você realizar o desafio proposto. Leia atentamente cada seção antes de iniciar o desenvolvimento.
+API RESTful para gerenciamento de animais e consultas de uma clínica veterinária, com histórico de consultas, validações, documentação estruturada via Swagger e dockerização. Desenvolvida com Node.js e NestJS.
 
 ## Contexto
 
-Dra. Ana, uma médica veterinária dedicada, está expandindo sua clínica e precisa de uma solução eficiente para gerenciar o cadastro dos animais atendidos. Sua missão é criar uma API RESTful que permita registrar, consultar, atualizar e remover pacientes de forma simples e rápida. 🐕🐈
+Dra. Ana está expandindo sua clínica e precisa de uma solução eficiente para gerenciar o cadastro de animais e suas consultas. Esta API permite:
 
-## Objetivo do Desafio 🚀
+- Registrar, consultar, atualizar e remover animais.
+- Agendar consultas com validações para evitar duplicidade de horários.
+- Editar, remover e consultar as consultas.
+- Manter um histórico de consultas por animal.
 
-Desenvolver uma API RESTful utilizando Node.js e o framework de sua preferência (Express.js, Fastify ou NestJS), com dados armazenados em memória e dockerização completa.
+## Funcionalidades implementadas 🚀
 
-## Requisitos Técnicos 📋
+- API criada com o uso de Node.js e NestJS.
+- Cadastro de animais e consultas.
+- Na hora de criar uma consulta é permitido criar um animal junto, caso ele não esteja cadastrado.
+- Proteção para não permitir duas consultas no mesmo dia e horário.
+- Mensagens de erro personalizadas, como: ID do animal não encontrado, consulta já marcada para este dia e horário, cadastro de animal requer todos os campos preenchidos.
+- Ao apagar um animal, todo o histórico de consultas é removido automaticamente.
+- Documentação Swagger, podendo facilitar os testes por meio de: http://localhost:3000/api 
+- API pronta para rodar tanto via npm quanto via Docker.
+
+## Tecnologias utilizadas 📋
 
 - Node.js
-- Framework: Express.js, Fastify ou NestJS
-- Dados em memória (não usar banco de dados)
+- Framework: NestJS
+- Dados em memória 
 - Dockerfile funcional
 - Porta padrão: 3000
+- Swagger
 
-## Endpoints da API
+## Arquitetura do projeto
 
-### ➕ POST /animais
-Adiciona um novo animal à lista de pacientes.
-**Exemplo de corpo da requisição:**
-```json
-{
-	"nome": "Rex",
-	"especie": "cachorro",
-	"idade": 5
-}
-```
-**Resposta esperada:**
-```json
-{
-	"id": 1,
-	"nome": "Rex",
-	"especie": "cachorro",
-	"idade": 5
-}
-```
+O projeto segue o padrão modular do NestJS, organizado em dois módulos principais: Animais e Consultas, com Controller, Service, DTO e Entitys.
 
-### 📋 GET /animais
-Retorna todos os animais cadastrados.
-**Filtro por espécie:** `/animais?especie=cachorro`
-**Resposta esperada:**
-```json
-[
-	{ "id": 1, "nome": "Rex", "especie": "cachorro", "idade": 5 },
-	{ "id": 2, "nome": "Miau", "especie": "gato", "idade": 3 }
-]
-```
+🔹 Animal
+- Campos: id, nome, especie, idade, genero, responsavel, telefoneResponsavel.
+- Possui histórico de consultas (historicoConsultas?: Consulta[]).
+- Ao ser removido, todas as consultas do histórico também são deletadas.
 
-### 🔍 GET /animais/:id
-Retorna os detalhes de um animal pelo ID.
-- Se encontrado: objeto JSON do animal
-- Se não encontrado: status 404 Not Found com mensagem de erro
+🔹 Consulta
+- Campos: id, animal, dataConsulta, horarioConsulta, motivoConsulta, valor.
+- Verifica conflitos de data e horário para evitar duplicidade.
+- Ao criar uma consulta, é possível vincular a um animal existente ou criar um novo automaticamente.
 
-### ✏️ PUT /animais/:id
-Atualiza as informações de um animal pelo ID.
-**Exemplo de corpo da requisição:**
-```json
-{
-	"nome": "Max",
-	"idade": 6
-}
-```
-- Se atualizado: retorna o animal atualizado
-- Se não encontrado: status 404 Not Found
+🔹 Fluxo da aplicação
 
-### 🗑️ DELETE /animais/:id
-Remove um animal pelo ID.
-- Sucesso: status 204 No Content
-- Não encontrado: status 404 Not Found
+- Endpoints Animais → chamam AnimaisService
+Criação, leitura, atualização e remoção de animais
+Validações de campos obrigatórios
+Remoção de histórico de consultas ao deletar um animal
 
-## Critérios de Avaliação 🧐
+- Endpoints Consultas → chamam ConsultasService
+Criação de consultas vinculadas a animais
+Proteção contra agendamento duplicado (mesmo dia e horário)
+Atualização e remoção de consultas
+Retorno de dados do animal sem duplicar o histórico
 
-- Implementação dos requisitos
-- Dockerfile funcional
-- Organização e estrutura do projeto
-- Legibilidade e boas práticas
-- Tratamento correto de erros e status HTTP
-- Documentação clara
+🔹 Proteções e Validações
 
-## Como Submeter o Projeto 🏁
+- Cadastro de animais exige todos os campos preenchidos.
+- Não é permitido duas consultas no mesmo dia e horário.
+- Mensagens de erro personalizadas para cada situação (ex: ANIMAL_NAO_ENCONTRADO, CONSULTA_CONFLITO).
+- Ao apagar um animal, o histórico de consultas é automaticamente removido.
 
-1. 📥 **Clone este repositório:**
-	 ```
-	 git clone <URL_DO_REPOSITORIO>
-	 cd api-veterinaria-trainee
-	 ```
-2. 🐳 **Construa a imagem Docker:**
-	 ```
-	 docker build -t api-veterinaria-trainee .
-	 ```
-3. ▶️ **Execute o contêiner:**
-	 ```
-	 docker run -p 3000:3000 api-veterinaria-trainee
-	 ```
-4. 📤 **Suba o projeto para o GitHub e compartilhe o link.**
+## Como Rodar o projeto 🏁
 
-## Observações Importantes ⚠️
+1. 🐳 **Via Docker**
 
-- Os dados são armazenados apenas em memória e serão perdidos ao reiniciar a aplicação.
-- O projeto é exclusivamente para fins de avaliação técnica.
+- docker build -t api-veterinaria-trainee .
+- docker run -p 3000:3000 api-veterinaria-trainee
 
----
+2. ▶️ **Via npm**
 
-## Material de Apoio 📚
+- npm run start:dev
+- localhost:3000/api para testes
 
-A seguir estão alguns links úteis para ajudá-lo a iniciar o projeto:
-- Docker: [Documentação Oficial do Docker](https://docs.docker.com/get-started/)
-- Aplicação NodeJs com Docker: [Tutorial de Docker para Node.js](https://youtu.be/MiAiFTQjitc)
+## OBSERVAÇÕES
 
-Sinta-se a vontade para a escolher o framework que mais domina ou tem interesse em aprender:
-- Express.js: [Documentação Oficial do Express](https://expressjs.com/)
-- NestJS: [Documentação Oficial do NestJS](https://docs.nestjs.com/)
-- Fastify: [Documentação Oficial do Fastify](https://www.fastify.io/docs/latest/)
-
-### Saiba o que está fazendo em cada etapa do desenvolvimento, pois será questionado sobre suas escolhas técnicas.
-
-### Serão considerados os commits feitos até o dia 22/09 23:59h.
-
-Em caso de dúvidas, entre em contato! 💬
+Tanto o Node quanto o Nest são novos pra mim, então pode ser que não tenha ido para resoluções tão boas, pelos melhores caminhos mas foi o jeito que consegui entregar, neste momento. Obrigada, qualquer dúvida..Estou a disposição
