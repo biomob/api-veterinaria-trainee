@@ -1,0 +1,12 @@
+version: "2"
+
+services:
+  api-veterinaria:
+    build:
+      context: .
+      command: "npm run start"
+      working_dir: /home/node/app
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"

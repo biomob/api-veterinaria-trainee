@@ -1,0 +1,20 @@
+{
+  "name": "api-veterinaria-trainee",
+  "version": "1.0.0",
+  "description": "Bem-vindo ao teste técnico! Este documento contém todas as informações necessárias para você realizar o desafio proposto. Leia atentamente cada seção antes de iniciar o desenvolvimento.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  }
+}
