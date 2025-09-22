@@ -2,6 +2,8 @@
 
 API_VETERINARIA
 
+## Subtitulo
+
 ## Contexto
 
 Dra. Ana, uma médica veterinária dedicada, está expandindo sua clínica e precisa de uma solução eficiente para gerenciar o cadastro dos animais atendidos. O objetivo da API RESTful é permitir as seguintes questões: registrar, consultar, atualizar e remover pacientes de forma simples e rápida. 🐕🐈
@@ -20,34 +22,13 @@ node src/index.js
 
 ````
 
-## API Endpoints
+API Endpoints:
 
-```bash
 POST /animais - Cria o cadastro de um novo animal.
-```
-
-```bash
 GET /animais - Lista o cadastro de todos os animais.
-```
-
-```bash
 GET /animais/{id} - Busca o cadastro de um animal por ID.
-```
-
-```bash
 PUT /animais{id} - Atualiza os dados de um animal por ID.
-```
-
-```bash
 DELETE /animais/{id} - Remove o cadastro de um animal por ID.
-```
-
-```bash
 GET /animais/especie/{especie} - Lista do cadastro de animais por espécie.
-```
 
-## Observações acerca do projeto
-
-Ao testar a API: embora haja um GET ALL para buscar toda a lista de animais cadastrados, não há a possiblidade de fazer um POST - cadastrar dois ou mais animais ao mesmo tempo!!
-
-O Docker file não está funcional.
+Uma pequena observação ao testar a API: embora haja um GET ALL para buscar toda a lista de animais cadastrados, não há a possiblidade de fazer um POST - cadastrar dois ou mais animais ao mesmo tempo!!
