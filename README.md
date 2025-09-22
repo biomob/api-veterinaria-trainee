@@ -1,124 +1,85 @@
-# 🐾 Instruções para o Teste Técnico - API Veterinária Trainee
 
-Bem-vindo ao teste técnico! Este documento contém todas as informações necessárias para você realizar o desafio proposto. Leia atentamente cada seção antes de iniciar o desenvolvimento.
+#  🐾 API Veterinária - Projeto Trainee 🐾
 
 ## Contexto
 
-Dra. Ana, uma médica veterinária dedicada, está expandindo sua clínica e precisa de uma solução eficiente para gerenciar o cadastro dos animais atendidos. Sua missão é criar uma API RESTful que permita registrar, consultar, atualizar e remover pacientes de forma simples e rápida. 🐕🐈
+Criação de uma API RESTful utilizando os metodos HTTP para que possa permitir ao usuario registrar, consultar, atualizar e remover os pacientes de forma rápida e simples. 🐕🐈
 
-## Objetivo do Desafio 🚀
 
-Desenvolver uma API RESTful utilizando Node.js e o framework de sua preferência (Express.js, Fastify ou NestJS), com dados armazenados em memória e dockerização completa.
+## Stacks utilizadas
 
-## Requisitos Técnicos 📋
+**Back-end:** NodeJs, Express, TypesCript, Docker e Dados Armazenados em Memória (uso de vetor.)
 
-- Node.js
-- Framework: Express.js, Fastify ou NestJS
-- Dados em memória (não usar banco de dados)
-- Dockerfile funcional
-- Porta padrão: 3000
 
-## Endpoints da API
+## Funcionalidades
 
-### ➕ POST /animais
-Adiciona um novo animal à lista de pacientes.
-**Exemplo de corpo da requisição:**
-```json
-{
-	"nome": "Rex",
-	"especie": "cachorro",
-	"idade": 5
-}
+- Inserir um novo paciente. ✔️ 
+- Retornar uma lista de pacientes cadastrados. ✔️ 
+- Retornar animais pelo ID informado. ✔️ 
+- Atualizar as informações de um animal pelo ID informado. ✔️
+- Deletar um animal pelo ID informado. ✔️
+
+### Adiciona um novo animal à lista de pacientes.
+#### Exemplos de corpo da requisição:
+
+        ➕ POST/animais - http://localhost:3000/animais
+
+        ✔️ {"id": 6,"nome": "Farao","especie": "Cachorro","idade": 5}
+            O retorno da mensagem informa 201 Created.
+
+### Retorna uma lista de animais cadastrados ou por seu ID informado.
+#### Exemplos de corpo da requisição:
+
+        📋 GET/animais - http://localhost:3000/animais
+        - Se encontrado: objeto JSON, retorna os detalhes de um animal pelo ID.
+
+        ✔️ [{"id": 1,"nome": "Rex","especie": "Cachorro","idade": "5"},
+            {"id": 2,"nome": "Miau","especie": "Gato","idade": "2"}]
+
+        - Se não encontrado: status 404 Not Found com mensagem de erro
+        ❌ http://localhost:3000/animais/62
+            {"error": "O animal informado nao foi encontrado"}
+
+        🔍 GET /animais/:id - http://localhost:3000/animais/1
+        ✔️ {"id": 1,"nome": "Rex","especie": "Cachorro","idade": "5"}
+        
+
+### Alteração de um animal com id.
+#### Exemplos de corpo da requisição:
+        ✏️ PUT/animais/id - http://localhost:3000/animais/6
+        - Se atualizado: retorna o animal atualizado
+
+        ✔️ {"nome": "Fumaca","especie": "Cachorro","idade": 9}
+
+        - Se não encontrado: status 404 Not Found
+        ❌ {"error": "Animal informado nao econtroado"}
+        
+### Exclusao de um animal com id.
+#### Exemplos de corpo da requisição:
+        🗑️ DELETE /animais/:id - http://localhost:3000/animais/6
+        - Se encontrado: exclui o animal informado
+        
+        - Se não encontrado: status 404 Not Found
+        ❌ {"error": "Animal informado nao foi encontrado"}
+
+
+
+## Instalação
+
+1 - 📥 Clone este repositório:
+
+```bash
+    git clone <URL_DO_REPOSITORIO>
+    cd api-veterinaria-trainee
 ```
-**Resposta esperada:**
-```json
-{
-	"id": 1,
-	"nome": "Rex",
-	"especie": "cachorro",
-	"idade": 5
-}
+
+2 - 🐳 Construa a imagem Docker:
+
+```bash
+    docker build -t api-veterinaria-trainee .
 ```
 
-### 📋 GET /animais
-Retorna todos os animais cadastrados.
-**Filtro por espécie:** `/animais?especie=cachorro`
-**Resposta esperada:**
-```json
-[
-	{ "id": 1, "nome": "Rex", "especie": "cachorro", "idade": 5 },
-	{ "id": 2, "nome": "Miau", "especie": "gato", "idade": 3 }
-]
+3 - ▶️ Execute o contêiner:
+```bash
+    docker run -p 3000:3000 api-veterinaria-trainee
 ```
-
-### 🔍 GET /animais/:id
-Retorna os detalhes de um animal pelo ID.
-- Se encontrado: objeto JSON do animal
-- Se não encontrado: status 404 Not Found com mensagem de erro
-
-### ✏️ PUT /animais/:id
-Atualiza as informações de um animal pelo ID.
-**Exemplo de corpo da requisição:**
-```json
-{
-	"nome": "Max",
-	"idade": 6
-}
-```
-- Se atualizado: retorna o animal atualizado
-- Se não encontrado: status 404 Not Found
-
-### 🗑️ DELETE /animais/:id
-Remove um animal pelo ID.
-- Sucesso: status 204 No Content
-- Não encontrado: status 404 Not Found
-
-## Critérios de Avaliação 🧐
-
-- Implementação dos requisitos
-- Dockerfile funcional
-- Organização e estrutura do projeto
-- Legibilidade e boas práticas
-- Tratamento correto de erros e status HTTP
-- Documentação clara
-
-## Como Submeter o Projeto 🏁
-
-1. 📥 **Clone este repositório:**
-	 ```
-	 git clone <URL_DO_REPOSITORIO>
-	 cd api-veterinaria-trainee
-	 ```
-2. 🐳 **Construa a imagem Docker:**
-	 ```
-	 docker build -t api-veterinaria-trainee .
-	 ```
-3. ▶️ **Execute o contêiner:**
-	 ```
-	 docker run -p 3000:3000 api-veterinaria-trainee
-	 ```
-4. 📤 **Suba o projeto para o GitHub e compartilhe o link.**
-
-## Observações Importantes ⚠️
-
-- Os dados são armazenados apenas em memória e serão perdidos ao reiniciar a aplicação.
-- O projeto é exclusivamente para fins de avaliação técnica.
-
----
-
-## Material de Apoio 📚
-
-A seguir estão alguns links úteis para ajudá-lo a iniciar o projeto:
-- Docker: [Documentação Oficial do Docker](https://docs.docker.com/get-started/)
-- Aplicação NodeJs com Docker: [Tutorial de Docker para Node.js](https://youtu.be/MiAiFTQjitc)
-
-Sinta-se a vontade para a escolher o framework que mais domina ou tem interesse em aprender:
-- Express.js: [Documentação Oficial do Express](https://expressjs.com/)
-- NestJS: [Documentação Oficial do NestJS](https://docs.nestjs.com/)
-- Fastify: [Documentação Oficial do Fastify](https://www.fastify.io/docs/latest/)
-
-### Saiba o que está fazendo em cada etapa do desenvolvimento, pois será questionado sobre suas escolhas técnicas.
-
-### Serão considerados os commits feitos até o dia 22/09 23:59h.
-
-Em caso de dúvidas, entre em contato! 💬

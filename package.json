@@ -1,0 +1,12 @@
+{
+    "name": "api-veterinaria-trainee",
+    "version": "1.0.0",
+    "description": "API veterinaria trainee com docker",
+    "main": "src/server.js",
+    "scripts": {
+        "start": "node src/server.js"
+    },
+    "dependencies": {
+        "express": "^4.18.1"
+    }
+}
