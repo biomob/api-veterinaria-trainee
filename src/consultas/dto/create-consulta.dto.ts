@@ -1,47 +1,37 @@
 import { IsNotEmpty, IsNumber, IsDateString, IsString, IsOptional } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateConsultaDto {
-  @IsOptional()
-  @IsNumber()
-  animalId?: number;          // se existir, usa o animal existente
 
-  @IsOptional()
-  @IsString()
-  nomeAnimal?: string;
+  @IsOptional() @IsNumber() animalId?: number;
 
-  @IsOptional()
-  @IsString()
-  especie?: string;
+  @ApiPropertyOptional({ description: 'Nome do Animal caso queira cadastrar um novo', example: 'Bob' })
+  @IsOptional() @IsString() nomeAnimal?: string;
 
-  @IsOptional()
-  @IsNumber()
-  idade?: number;
+  @ApiPropertyOptional({ description: 'Espécie do Animal caso queira cadastrar um novo', example: 'Gato' })
+  @IsOptional() @IsString() especie?: string;
 
-  @IsOptional()
-  @IsString()
-  genero?: string;
+  @ApiPropertyOptional({ description: 'Idade do Animal caso queira cadastrar um novo', example: 3 })
+  @IsOptional() @IsNumber() idade?: number;
 
-  @IsOptional()
-  @IsString()
-  responsavel?: string;
+  @ApiPropertyOptional({ description: 'Gênero do Animal caso queira cadastrar um novo', example: 'Macho' })
+  @IsOptional() @IsString() genero?: string;
 
-  @IsOptional()
-  @IsString()
-  telefoneResponsavel?: string;
+  @ApiPropertyOptional({ description: 'Responsável do Animal caso queira cadastrar um novo', example: 'Paulo Roberto' })
+  @IsOptional() @IsString() responsavel?: string;
 
-  @IsNotEmpty()
-  @IsDateString()
-  dataConsulta: string;
+  @ApiPropertyOptional({ description: 'Telefone do Responsável caso queira cadastrar um novo', example: '24981224441' })
+  @IsOptional() @IsString() telefoneResponsavel?: string;
 
-  @IsNotEmpty()
-  @IsString()
-  horarioConsulta: string;
+  @ApiProperty({ description: 'Data da consulta', type: String, format: 'date-time', example: '2025-09-22' })
+  @IsNotEmpty() @IsDateString() dataConsulta: string;
 
-  @IsNotEmpty()
-  @IsString()
-  motivoConsulta: string;
+  @ApiProperty({ description: 'Horário da consulta', type: String, example: '14:50' })
+  @IsNotEmpty() @IsString() horarioConsulta: string;
 
-  @IsNotEmpty()
-  @IsNumber()
-  valor: number;
+  @ApiProperty({ description: 'Motivo da consulta', example: 'Vacinação' })
+  @IsNotEmpty() @IsString() motivoConsulta: string;
+
+  @ApiProperty({ description: 'Valor da consulta', type: Number, example: 200 })
+  @IsNotEmpty() @IsNumber() valor: number;
 }

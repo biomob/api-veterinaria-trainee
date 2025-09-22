@@ -8,12 +8,14 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   const config = new DocumentBuilder()
     .setTitle('API Veterinária')
-    .setDescription('API para gerenciar animais e consultas')
+    .setDescription('API para armazenar os animais cadastrados, as consultas agendadas e realizadas, e, para conseguir editar/deletar/buscar e cadastrar informações')
     .setVersion('1.0')
+    .addTag('animais')
+    .addTag('consultas')
     .build();
     
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(3000);
 }
 bootstrap();
