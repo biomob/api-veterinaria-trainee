@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAnimalDto } from './dto/create-animai.dto';
 import { UpdateAnimalDto } from './dto/update-animai.dto';
 import { Animal } from './entities/animai.entity';
+import { CreateAnimaisListDto } from './dto/create-animais-lista.dto';
 
 @Injectable()
 export class AnimaisService {
@@ -19,15 +20,21 @@ export class AnimaisService {
     return novoAnimal;
   }
 
-  
-   findAll(especie?: string): Animal[] {
-    if (especie) {
-      return this.animais.filter(animal => 
-        animal.especie.toLowerCase() === especie.toLowerCase()
-      );
-    }
-    return this.animais;
+  findAll(especie?: string): Animal[] {
+  if (this.animais.length === 0) {
+    throw new NotFoundException('Nenhum animal foi encontrado.');
   }
+
+  if (especie) {
+    const animaisFiltrados = this.animais.filter(animal => 
+      animal.especie.toLowerCase() === especie.toLowerCase()
+    );
+    
+    if (animaisFiltrados.length === 0) {throw new NotFoundException(`Nenhum animal da espécie '${especie}' foi encontrado`);}
+    return animaisFiltrados;
+  }
+  return this.animais;
+}
 
   findOne(id: number):Animal {
        const animal = this.animais.find(animal => animal.id === id);
@@ -68,4 +75,21 @@ export class AnimaisService {
 
     this.animais.splice(animalIndex, 1);
   }
+
+createMultiple(createAnimaisListDto: CreateAnimaisListDto): Animal[] {
+  const novosAnimais: Animal[] = [];
+  
+  for (const animalDto of createAnimaisListDto.animais) {
+    const novoAnimal = new Animal(
+      this.Id++,
+      animalDto.nome,
+      animalDto.especie,
+      animalDto.idade,
+    );
+    this.animais.push(novoAnimal);
+    novosAnimais.push(novoAnimal);
+  }
+  
+  return novosAnimais;
+}
 }
