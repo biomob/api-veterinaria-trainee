@@ -1,0 +1,23 @@
+{
+  "name": "api-veterinaria-trainee",
+  "version": "1.0.0",
+  "description": "Teste Técnico - API Veterinária Trainee (CRUD em memória)",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
