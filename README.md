@@ -119,6 +119,6 @@ Sinta-se a vontade para a escolher o framework que mais domina ou tem interesse 
 
 ### Saiba o que está fazendo em cada etapa do desenvolvimento, pois será questionado sobre suas escolhas técnicas.
 
-### Serão considerados os commits feitos até o dia 22/09 23:59h.
+### Serão considerados os commits feitos até o dia 26/09 11:59h.
 
 Em caso de dúvidas, entre em contato! 💬
